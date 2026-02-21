@@ -12,6 +12,7 @@ import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { GetProductByIdDto } from './dto/get-product-by-id.dto';
+import { AllowAnonymous } from '@thallesp/nestjs-better-auth';
 
 @Controller('products')
 export class ProductController {
@@ -28,9 +29,9 @@ export class ProductController {
   // }
 
   @Get()
+  @AllowAnonymous()
   findOne(@Query() query: GetProductByIdDto) {
-    console.log('cek query', query);
-    return this.productService.findOne(query.id);
+    return this.productService.findAll();
   }
 
   @Patch(':id')
